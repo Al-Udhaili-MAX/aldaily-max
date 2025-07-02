@@ -1,0 +1,198 @@
+/* الخطوط */
+@font-face {
+  font-family: 'TitleFont';
+  src: url('TitleFont.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'ProductFont';
+  src: url('ProductFont.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'FooterFont';
+  src: url('FooterFont.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'PriceFont';
+  src: url('PriceFont.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'ContactFont';
+  src: url('ContactFont.ttf') format('truetype');
+}
+
+/* الجسم العام */
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #121212;
+  color: #f1f1f1;
+  direction: rtl;
+}
+
+/* شريط التواصل */
+.contact-bar {
+  font-family: 'ContactFont', sans-serif;
+  background-color: #0d0d0d;
+  color: #00e676;
+  text-align: center;
+  padding: 8px;
+  font-size: 16px;
+  border-bottom: 1px solid #333;
+}
+
+/* رأس الصفحة */
+header {
+  background-color: #1e1e1e;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  border-bottom: 2px solid #333;
+}
+
+.logo {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+}
+
+header h1 {
+  font-family: 'TitleFont', sans-serif;
+  font-size: 26px;
+}
+
+/* الصفحة الرئيسية */
+main {
+  padding: 20px;
+}
+
+/* توسيط لوحة التحكم */
+#dashboard-content {
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* شبكة المنتجات */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 20px;
+  justify-content: center;
+}
+
+/* بطاقة المنتج */
+.product {
+  background-color: #1c1c1c;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease;
+}
+
+.product:hover {
+  transform: scale(1.03);
+}
+
+.product img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.product h2 {
+  font-family: 'ProductFont', sans-serif;
+  font-size: 18px;
+  color: #ff9800;
+}
+
+.product p {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.price {
+  font-family: 'PriceFont', sans-serif;
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #4caf50;
+}
+
+/* أزرار المنتج */
+.product button {
+  margin-top: 10px;
+  background-color: #e53935;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.product button:hover {
+  background-color: #c62828;
+}
+
+/* النموذج */
+form {
+  background-color: #1f1f1f;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+form input,
+form textarea,
+form select {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  font-size: 16px;
+}
+
+form button {
+  background-color: #2196f3;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #1976d2;
+}
+
+/* التذييل */
+footer {
+  background-color: #1e1e1e;
+  color: #bbb;
+  text-align: center;
+  padding: 15px;
+  border-top: 1px solid #333;
+  margin-top: 50px;
+}
+
+footer p {
+  font-family: 'FooterFont', sans-serif;
+}
+
